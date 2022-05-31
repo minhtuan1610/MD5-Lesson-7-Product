@@ -47,4 +47,16 @@ export class ProductService {
   saveProduct(product) {
     this.products.push(product);
   }
+
+  findById(id: number) {
+    return this.products.find(product => product.id === id);
+  }
+
+  updateById(id: number, product: Product) {
+    for (let i = 0; i < this.products.length; i++) {
+      if (this.products[i].id === id) {
+        this.products[i] = product;
+      }
+    }
+  }
 }
