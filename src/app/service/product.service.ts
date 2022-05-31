@@ -59,4 +59,10 @@ export class ProductService {
       }
     }
   }
+
+  deleteProduct(id: number) {
+    this.products = this.products.filter(product => {
+      return product.id !== id;
+    });
+  }
 }
