@@ -8,8 +8,11 @@ import {CategoryService} from '../../service/category/category.service';
   styleUrls: ['./category-create.component.css']
 })
 export class CategoryCreateComponent implements OnInit {
-  categoryForm: FormGroup = new FormGroup({
+  /*categoryForm: FormGroup = new FormGroup({
     id: new FormControl(),
+    name: new FormControl(),
+  });*/
+  categoryForm: FormGroup = new FormGroup({
     name: new FormControl(),
   });
 
@@ -21,7 +24,11 @@ export class CategoryCreateComponent implements OnInit {
 
   submit() {
     const category = this.categoryForm.value;
-    this.categoryService.saveCategory(category);
-    this.categoryForm.reset();
+    this.categoryService.saveCategory(category).subscribe(() => {
+      this.categoryForm.reset();
+      alert('Created successfully');
+    }, e => {
+      console.log(e);
+    });
   }
 }

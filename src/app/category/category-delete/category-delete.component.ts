@@ -12,7 +12,7 @@ export class CategoryDeleteComponent implements OnInit {
   categoryForm: FormGroup;
   id: number;
 
-  constructor(private categoryService: CategoryService,
+  /*constructor(private categoryService: CategoryService,
               private router: Router,
               private activatedRoute: ActivatedRoute) {
     this.activatedRoute.paramMap.subscribe((paramMap: ParamMap) => {
@@ -23,17 +23,42 @@ export class CategoryDeleteComponent implements OnInit {
         name: new FormControl(category.name),
       });
     });
+  }*/
+
+  constructor(private categoryService: CategoryService,
+              private router: Router,
+              private activatedRoute: ActivatedRoute) {
+    this.activatedRoute.paramMap.subscribe((paramMap: ParamMap) => {
+      this.id = +paramMap.get('id');
+      this.getCategory(this.id);
+    });
   }
 
   ngOnInit() {
   }
 
-  getCategory(id: number) {
+  /*getCategory(id: number) {
     return this.categoryService.findById(id);
+  }*/
+
+  getCategory(id: number) {
+    return this.categoryService.findById(id).subscribe(category => {
+      this.categoryForm = new FormGroup({
+        name: new FormControl(category.name),
+      });
+    });
   }
 
-  deleteCategory(id: number) {
+  /*deleteCategory(id: number) {
     this.categoryService.deleteCategory(id);
     this.router.navigate(['/category/list']);
+  }*/
+
+  deleteCategory(id: number) {
+    this.categoryService.deleteCategory(id).subscribe(() => {
+      this.router.navigate(['/category/list']);
+    }, e => {
+      console.log(e);
+    });
   }
 }

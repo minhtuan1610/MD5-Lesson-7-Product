@@ -17,7 +17,13 @@ export class CategoryListComponent implements OnInit {
     this.getAll();
   }
 
-  getAll() {
+  /*getAll() {
     this.categories = this.categoryService.getAll();
+  }*/
+
+  getAll() {
+    this.categoryService.getAll().subscribe(categories => {
+      this.categories = categories;
+    });
   }
 }
