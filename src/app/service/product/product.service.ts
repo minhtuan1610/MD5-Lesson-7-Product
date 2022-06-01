@@ -44,12 +44,12 @@ export class ProductService {
     return this.products;
   }
 
-  findById(id: number) {
-    return this.products.find(product => product.id === id);
+  saveProduct(product) {
+    this.products.push(product);
   }
 
-  saveProduct(product) {
-    return this.products.push(product);
+  findById(id: number) {
+    return this.products.find(product => product.id === id);
   }
 
   updateById(id: number, product: Product) {
